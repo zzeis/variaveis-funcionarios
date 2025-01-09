@@ -45,9 +45,28 @@
             @endif
         </script>
 
-        <div class="row">
-            <a class="col-md-3" style="text-decoration: none" href="{{ route('employee-variables.export') }}">Gerar
-                excel <i class="ri-export-line"></i></a>
+        <div>
+
+            <form class="row " action="{{ route('employee-variables.export') }}" method="GET">
+                <label>Selecione o mês</label>
+                <span class="col-md-4">
+                
+                    <select class="form-select w-50" name="mes" id="mes" required>
+                        <option value="">Selecione um mês</option>
+                        @foreach (range(1, 12) as $m)
+                            <option value="{{ $m }}">
+                                {{ \Carbon\Carbon::create()->month($m)->translatedFormat('F') }}</option>
+                        @endforeach
+                    </select>
+                </span>
+                <span class="col-md-2">
+                    <button type="submit" class="btn btn-primary ">exportar <i
+                            class="ri-file-excel-2-line"></i></button>
+                </span>
+
+
+            </form>
+
             {{-- <a class="col-md-3" style="text-decoration: none" href="{{ route('funcionario.create') }}">
                 Adicionar funcionario
                 <i class="ri-user-add-line"></i></a>

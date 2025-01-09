@@ -5,6 +5,7 @@ namespace App\Exports;
 
 use App\Models\Funcionario;
 use App\Models\FuncionariosVariaveis;
+use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -13,12 +14,19 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class FuncionarioVariaveisExport implements FromCollection, WithHeadings, ShouldAutoSize, WithStyles
 {
+    protected $mes;
+
+    public function __construct($mes)
+    {
+        $this->mes = $mes;
+    }
+
     public function collection()
     {
         return FuncionariosVariaveis::with(['funcionario', 'variavel'])
+            ->whereMonth('reference_date', $this->mes)
             ->get()
             ->map(function ($item) {
-
                 return [
                     $item->funcionario->nome,
                     $item->funcionario->matricula,
@@ -28,8 +36,7 @@ class FuncionarioVariaveisExport implements FromCollection, WithHeadings, Should
                     $item->variavel->codigo,
                     $item->variavel->descricao,
                     $item->quantidade,
-                    $item->reference_date,
-
+                    Carbon::parse($item->reference_date)->format('d/m/Y'), // Conversão para Carbon   
                 ];
             });
     }
@@ -46,9 +53,9 @@ class FuncionarioVariaveisExport implements FromCollection, WithHeadings, Should
             'Descrição Variável',
             'Quantidade',
             'Data Referência',
-
         ];
     }
+
     public function styles(Worksheet $sheet)
     {
         return [

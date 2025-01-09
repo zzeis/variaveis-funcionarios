@@ -51,6 +51,12 @@ class FuncionarioVariavelController extends Controller
 
     public function export(Request $request)
     {
-        return Excel::download(new FuncionarioVariaveisExport, 'variaveis-funcionarios.xlsx');
+        $request->validate([
+            'mes' => 'required|integer|between:1,12',
+        ]);
+
+        $mes = $request->input('mes');
+
+        return Excel::download(new FuncionarioVariaveisExport($mes), "funcionarios_variaveis_mes_{$mes}.xlsx");
     }
 }
