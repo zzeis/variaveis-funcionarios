@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Funcionario extends Model
 {
+    use HasFactory;
     protected $fillable = ['nome', 'matricula', 'secao', 'diretoria', 'cargo'];
 
 
@@ -17,6 +18,28 @@ class Funcionario extends Model
             ->withPivot('quantidade')
             ->withTimestamps();
     }
+    public function setNomeAttribute($value)
+    {
+        $this->attributes['nome'] = strtoupper($value);
+    }
 
-    use HasFactory;
+    // Convertendo o campo 'cargo' para maiúsculo
+    public function setCargoAttribute($value)
+    {
+        $this->attributes['cargo'] = strtoupper($value);
+    }
+
+    // Convertendo o campo 'diretoria' para maiúsculo
+    public function setDiretoriaAttribute($value)
+    {
+        $this->attributes['diretoria'] = strtoupper($value);
+    }
+
+    // Convertendo o campo 'secao' para maiúsculo
+    public function setSecaoAttribute($value)
+    {
+        $this->attributes['secao'] = strtoupper($value);
+    }
+
+    
 }
