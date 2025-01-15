@@ -16,6 +16,7 @@ class FuncionarioVariavelController extends Controller
 
         return view('variaveis.index');
     }
+  
 
     public function store(Request $request)
     {
