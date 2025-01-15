@@ -17,4 +17,12 @@ class Variaveis extends Model
             ->withPivot('quantidade')
             ->withTimestamps();
     }
+
+    public function setDescricaoAttribute($value)
+    {
+        $this->attributes['descricao'] = strtoupper($value);
+    }
+
+
+    
 }
