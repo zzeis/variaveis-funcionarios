@@ -1,73 +1,77 @@
-<head>
-    <title>Nova variavel</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
+@extends('layouts.app')
 
-<style>
-    a {
-        text-decoration: none;
-    }
 
-    body {
-        margin-top: 10%;
-    }
-</style>
 
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
-<script>
-@if (session('success'))
-    Swal.fire({
-        icon: 'success',
-        title: 'Sucesso!',
-        text: "{{ session('success') }}",
-        timer: 3000, // Tempo em milissegundos (opcional)
-        showConfirmButton: false
-    });
-@endif
 
-@if (session('error'))
-    Swal.fire({
-        icon: 'error',
-        title: 'Erro!',
-        text: "{{ session('error') }}",
-        timer: 3000, // Tempo em milissegundos (opcional)
-        showConfirmButton: false
-    });
-@endif
-</script>
-<div class="container">
-    <div class="">
+@section('content')
 
-        <div class="text-center">
-            <a class="text-center" href="{{ route('/') }}"><i class="ri-home-2-line"></i></a>
+
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
-        <h5 class="text-center">Adicionar Variavel </h5>
+    @endif
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Sucesso!',
+                text: "{{ session('success') }}",
+                timer: 3000, // Tempo em milissegundos (opcional)
+                showConfirmButton: false
+            });
+        @endif
+
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: "{{ session('error') }}",
+                timer: 3000, // Tempo em milissegundos (opcional)
+                showConfirmButton: false
+            });
+        @endif
+    </script>
+    <div class="container mx-auto mt-5 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+        <div class="">
 
 
-        <form class="w-50 mx-auto" action="{{ route('variavel.store') }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label>Codigo</label>
-                <input type="text" name="codigo" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label>Descricao</label>
-                <input type="text" name="descricao" class="form-control" required>
-            </div>
+            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+                Adicionar Variavel
+            </h2>
 
-            <button type="submit" class="btn btn-success mt-4">Salvar</button>
-        </form>
+
+            <form id="form" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4" action="{{ route('variavel.store') }}"
+                method="POST">
+                @csrf
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Codigo
+                    </label>
+                    <input type="text" name="codigo"
+                        class="block w-full rounded-md border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Descrição
+                    </label>
+                    <input type="text" name="descricao"
+                        class="block w-full rounded-md border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+                </div>
+
+            </form>
+            <button type="submit" form="form"
+                class=" mt-2 bg-indigo-600 text-white dark:bg-indigo-500 hover:bg-indigo-700 dark:hover:bg-indigo-600 px-4 py-2 rounded-md flex items-center">
+
+                Salvar</button>
+
+        </div>
     </div>
-</div>
+@endsection
