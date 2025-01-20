@@ -23,7 +23,7 @@ class FuncionarioVariavelController extends Controller
         $request->validate([
             'employee_id' => 'required|exists:funcionarios,id',
             'variable_id' => 'required|exists:variaveis,id',
-            'quantity' => 'required|numeric',
+            'quantity' => 'required',
             'reference_date' => 'required|date',
             'codigo_variavel' => 'required'
         ]);
