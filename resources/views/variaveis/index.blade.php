@@ -153,9 +153,9 @@
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                                     Quantidade:
                                 </label>
-                                <input type="number" name="quantity"
+                                <input type="text" id="quantity" name="quantity"
                                     class="mt-1 block w-full rounded-md bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
-                                    step="0.01" required>
+                                    required placeholder="0,00">
                             </div>
 
 
