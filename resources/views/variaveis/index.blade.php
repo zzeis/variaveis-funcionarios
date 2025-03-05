@@ -225,7 +225,7 @@
                     clearTimeout(searchTimeout);
                     const searchTerm = $(this).val();
 
-                    if (searchTerm.length >= 3) {
+                    if (searchTerm.length >= 2) {
                         searchTimeout = setTimeout(function() {
                             $.ajax({
                                 url: '/api/search-employees',
