@@ -85,6 +85,7 @@ Exportação Excel: Laravel Excel ou biblioteca similar
 
 📝 Estrutura do Projeto
 
+```bash
 ├── app/               # Lógica da aplicação
 ├── bootstrap/         # Inicialização
 ├── config/            # Configurações
@@ -96,6 +97,7 @@ Exportação Excel: Laravel Excel ou biblioteca similar
 ├── tests/             # Testes
 ├── vendor/            # Dependências
 └── docker/            # Configurações Docker
+```
 
 📌 Variáveis de Ambiente
 
