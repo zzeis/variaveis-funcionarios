@@ -27,30 +27,27 @@ Sistema de cadastro de funcionários com validação de dados e funcionalidade d
 1. Clone o repositório:
 
 ```bash
-git clone [URL_DO_REPOSITORIO]
+git clone https://github.com/zzeis/variaveis-funcionarios.git
 cd [NOME_DO_PROJETO]
 
-    Configure o ambiente:
 ```
 
-```bash
-Copy
+Configure o ambiente:
 
+```bash
 cp .env.example .env
 
     Suba os containers:
 ```
 
 ```bash
-Copy
-
 docker-compose up -d
-
-    Instale as dependências:
+    
 ```
 
+Instale as dependências:
+
 ```bash
-Copy
 
 docker-compose exec app composer install
 
