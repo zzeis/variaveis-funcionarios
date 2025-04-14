@@ -37,8 +37,10 @@ Configure o ambiente:
 ```bash
 cp .env.example .env
 
-    Suba os containers:
+   
 ```
+
+Suba os containers:
 
 ```bash
 docker-compose up -d
@@ -82,7 +84,6 @@ Containerização: Docker
 Exportação Excel: Laravel Excel ou biblioteca similar
 
 📝 Estrutura do Projeto
-Copy
 
 ├── app/               # Lógica da aplicação
 ├── bootstrap/         # Inicialização
