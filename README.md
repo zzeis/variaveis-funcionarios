@@ -103,14 +103,15 @@ Exportação Excel: Laravel Excel ou biblioteca similar
 
 Principais variáveis que precisam ser configuradas no .env:
 ini
-Copy
 
+```copy
 DB_CONNECTION=mysql
 DB_HOST=mysql
 DB_PORT=3306
 DB_DATABASE=nome_do_banco
 DB_USERNAME=usuario
 DB_PASSWORD=senha
+```
 
 📄 Licença
 
