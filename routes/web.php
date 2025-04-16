@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::middleware(['auth','active'])->group(function () {
+Route::middleware(['auth', 'active'])->group(function () {
 
 
     Route::get('/dashboard', [VariavelController::class, 'index'])->name('dashboard');
@@ -36,6 +36,13 @@ Route::middleware(['auth','active'])->group(function () {
     Route::get('/funcionarios/{id}/edit', [FuncionarioController::class, 'edit'])->name('funcionarios.edit');
     Route::put('/funcionarios/{id}', [FuncionarioController::class, 'update'])->name('funcionarios.update');
 
+    Route::post('/funcionarios/import', [FuncionarioController::class, 'import'])
+        ->name('funcionarios.import');
+
+    Route::get('/funcionarios/import/progress/{importId}', [FuncionarioController::class, 'checkProgress'])
+        ->name('funcionarios.import.progress');
+
+    Route::get('/funcionarios/download-template', [FuncionarioController::class, 'downloadTemplate'])->name('funcionarios.download-template');
 
     //variavel
     Route::get('/variaveis/list', [VariavelController::class, 'list'])->name('variaveis.list');
