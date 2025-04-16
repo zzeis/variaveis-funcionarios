@@ -10,20 +10,20 @@ export default defineConfig({
             input: [
                 "resources/css/app.css",
                 "resources/js/app.js",
-                
+                "resources/css/ti.css",
             ],
             refresh: true,
         }),
     ],
 
     server: {
-        host: process.env.VITE_SERVER_HOST || "0.0.0.0", // Usa a variável de ambiente ou um valor padrão
-        port: process.env.VITE_SERVER_PORT || 5173, // Porta configurável
+        host:  "0.0.0.0", // Usa a variável de ambiente ou um valor padrão
+        port:5173, // Porta configurável
         strictPort: true,
         cors: true,
         hmr: {
-            host: process.env.VITE_HMR_HOST || "localhost", // Configurável via variável de ambiente
-            port: process.env.VITE_HMR_PORT || 5173,
+            host:  "localhost", // Configurável via variável de ambiente
+            port:  5173,
         },
     },
     resolve: {
