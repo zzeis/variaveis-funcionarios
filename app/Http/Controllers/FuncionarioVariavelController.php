@@ -16,27 +16,28 @@ class FuncionarioVariavelController extends Controller
 
         return view('variaveis.index');
     }
-  
+
 
     public function store(Request $request)
     {
         $request->validate([
-            'employee_id' => 'required|exists:funcionarios,id',
+            'matricula' => 'required|exists:funcionarios,matricula',
             'variable_id' => 'required|exists:variaveis,id',
             'quantity' => 'required',
             'reference_date' => 'required|date',
             'codigo_variavel' => 'required'
         ]);
 
-        // Cria diretamente usando o modelo EmployeeVariable
+        $funcionario = Funcionario::where('matricula', $request->matricula)->first();
+
         FuncionariosVariaveis::create([
-            'funcionario_id' => $request->employee_id,
+            'funcionario_id' => $funcionario->id,
+            'matricula' => $request->matricula, // Armazenamos a matrícula também
             'variavel_id' => $request->variable_id,
             'quantidade' => $request->quantity,
             'descricao' => $request->descricao,
             'reference_date' => $request->reference_date,
             'codigo_variavel' => $request->codigo_variavel
-
         ]);
 
         return redirect()->back()->with('success', 'Variável atribuída com sucesso!');
@@ -59,5 +60,38 @@ class FuncionarioVariavelController extends Controller
         $mes = $request->input('mes');
 
         return Excel::download(new FuncionarioVariaveisExport($mes), "funcionarios_variaveis_mes_{$mes}.xlsx");
+    }
+
+    public function syncFuncionarioVariaveis()
+    {
+        // Obter todos os funcionários atuais com suas matrículas
+        $funcionariosAtuais = Funcionario::pluck('id', 'matricula')->toArray();
+
+        // Obter registros de variáveis
+        $registros = FuncionariosVariaveis::all();
+
+        $atualizados = 0;
+        $semMatricula = [];
+
+        foreach ($registros as $registro) {
+            // Se já temos a matrícula armazenada
+            if ($registro->matricula) {
+                // Verificar se existe funcionário com essa matrícula
+                if (array_key_exists($registro->matricula, $funcionariosAtuais)) {
+                    // Atualizar para o novo ID
+                    $registro->funcionario_id = $funcionariosAtuais[$registro->matricula];
+                    $registro->save();
+                    $atualizados++;
+                }
+            } else {
+                // Não temos a matrícula - precisamos tratar esse caso
+                $semMatricula[] = $registro->id;
+            }
+        }
+
+        return [
+            'atualizados' => $atualizados,
+            'sem_matricula' => $semMatricula
+        ];
     }
 }

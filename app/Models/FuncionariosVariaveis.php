@@ -14,7 +14,8 @@ class FuncionariosVariaveis extends Model
         'variavel_id',
         'quantidade',
         'codigo_variavel',
-        'reference_date'
+        'reference_date',
+        'matricula'
     ];
 
     protected $casts = [
@@ -31,5 +32,6 @@ class FuncionariosVariaveis extends Model
     public function variavel()
     {
         return $this->belongsTo(Variaveis::class);
+
     }
 }

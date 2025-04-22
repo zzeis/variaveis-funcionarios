@@ -156,7 +156,7 @@
                             <div>
                                 <label for="matricula"
                                     class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Matrícula:</label>
-                                <input type="text" id="matricula"
+                                <input type="text" id="matricula" name="matricula"
                                     class="block w-full rounded-md bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white border border-gray-300 dark:border-gray-600 py-2 px-4"
                                     readonly>
                             </div>

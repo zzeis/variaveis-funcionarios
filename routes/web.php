@@ -64,6 +64,8 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::post('/employee-variables', [FuncionarioVariavelController::class, 'store'])->name('employee-variables.store');
     Route::delete('/employee-variables/{id}', [FuncionarioVariavelController::class, 'destroy'])->name('employee-variables.destroy');
 
+    
+    Route::get('/funcionarios/sync', [FuncionarioVariavelController::class, 'syncFuncionarioVariaveis'])->name('variaveis.sync');
 
     Route::get('/variaveis', [FuncionarioVariavelController::class, 'index'])->name('variaveis');
 
